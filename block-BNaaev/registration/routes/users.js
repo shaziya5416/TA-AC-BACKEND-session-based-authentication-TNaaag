@@ -1,18 +1,20 @@
 var express = require('express');
 var router = express.Router();
+var User = require("../models/User");
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.render("users")
 });
 
 /*get request on register*/
 router.get("/register",function(req,res,next){
-  res.render("users");
+  res.render("register");
 })
 /*post request on register*/
 router.post("/register",function(req,res,next){
   User.create(req.body,(err,user)=>{
+    console.log(user);
     if(err) return next(err);
     res.redirect("/users/login")
   })
